@@ -6,6 +6,9 @@
  */
 
 #include "app_DRV2605L.h"
+#include "stm32l4xx_hal_i2c.h"
+
+void I2Cx_Error(void);
 
 static I2C_HandleTypeDef *hi2c;
 
@@ -36,9 +39,18 @@ void drv2605l_write(uint8_t reg, uint8_t data)
  */
 void drv2605l_read(uint8_t reg, uint8_t *buff)
 {
-	// Maybe insert error handling to check if this function returned HAL_OK?
-	HAL_I2C_Mem_Read(hi2c, (uint16_t)(I2C_ADDR<<1), (uint16_t)reg, I2C_MEMADD_SIZE_8BIT, buff, 0x1, HAL_MAX_DELAY);
+	HAL_StatusTypeDef status = HAL_OK;
 
+	status = HAL_I2C_Mem_Read(hi2c, (uint16_t)(I2C_ADDR<<1), (uint16_t)reg, I2C_MEMADD_SIZE_8BIT, buff, 0x1, HAL_MAX_DELAY);
+
+	/* Check communication status */
+	if (status != HAL_OK)
+	{
+		/* Re-Initialize the BUS */
+		I2Cx_Error();
+		/* Try again */
+		HAL_I2C_Mem_Read(hi2c, (uint16_t)(I2C_ADDR<<1), (uint16_t)reg, I2C_MEMADD_SIZE_8BIT, buff, 0x1, HAL_MAX_DELAY);
+	}
 }
 
 /**
@@ -116,4 +128,14 @@ void drv2605l_go(void)
 void drv2605l_stop(void)
 {
 	drv2605l_write(GO_REG, 0x0);
+}
+
+/**
+ * I2C error handling. De-initializes I2C comm bus and then
+ * re-initializes it.
+ */
+void I2Cx_Error(void) {
+	/** De-Initialize the I2C comm BUS and re-initialize **/
+	HAL_I2C_DeInit(hi2c);
+	HAL_I2C_Init(hi2c);
 }
