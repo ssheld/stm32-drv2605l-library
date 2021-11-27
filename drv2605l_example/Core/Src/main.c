@@ -22,7 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "app_DRV2605L.h"
+#include "drv2605l.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -93,7 +93,7 @@ int main(void)
 
   drv2605l_init(&hi2c3); // Initialize the drv2605l with the correct I2C config
 
-	drv2605l_set_mode(0x01); // Set mode to internal trigger input
+	drv2605l_set_mode(0x0); // Set mode to internal trigger input
 
 	drv2605l_motor_select(0x36); // ERM Motor
 

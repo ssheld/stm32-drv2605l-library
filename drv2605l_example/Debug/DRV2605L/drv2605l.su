@@ -1,0 +1,11 @@
+drv2605l.c:17:6:drv2605l_init	16	static
+drv2605l.c:27:6:drv2605l_write	32	static
+drv2605l.c:37:6:drv2605l_read	32	static
+drv2605l.c:56:6:drv2605l_set_mode	16	static
+drv2605l.c:66:6:drv2605l_motor_select	16	static
+drv2605l.c:75:6:drv2605l_set_library	16	static
+drv2605l.c:87:6:drv2605l_set_waveform	16	static
+drv2605l.c:96:9:drv2605l_get_status	16	static
+drv2605l.c:107:6:drv2605l_go	8	static
+drv2605l.c:117:9:drv2605l_waveform_active	16	static
+drv2605l.c:127:6:drv2605l_stop	8	static
