@@ -1,6 +1,6 @@
 <h1> STM32 Library for DRV2605L  </h1>
 
-STM32 library for using the DRV2605L haptic motor driver.
+STM32 library for using the DRV2605L haptic motor driver. The tutorial in this repository utilizes the [SensorTile development kit](https://www.st.com/en/evaluation-tools/steval-stlkt01v1.html).
 
 
 
